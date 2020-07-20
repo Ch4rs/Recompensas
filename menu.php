@@ -1,43 +1,29 @@
-<?php
- if(isset($_SESSION['user']))	{
-	if($_SESSION['id_privilegio'] == 1){
-        include_once '../SuperAdmin/menu.php';
-    }
-    else if($_SESSION['id_privilegio'] == 2){
-        include_once '../Administrador/menu.php';
-    }
-    else if($_SESSION['id_privilegio'] == 3){
-        include_once '../SupervisorMonitores/menu.php';
-    }
-    else if($_SESSION['id_privilegio'] == 4 || $_SESSION['id_privilegio'] == 5 || $_SESSION['id_privilegio'] == 6){
-        include_once '../Monitores/menu.php';
-    }
-    else if($_SESSION['id_privilegio'] == 7 || $_SESSION['id_privilegio'] == 8 || $_SESSION['id_privilegio'] == 9 || $_SESSION['id_privilegio'] == 10){
-         if ($_SESSION['id_privilegio']== 7) {
-            include_once '../Bitacora/menuizzi.php';
-        }elseif ($_SESSION['id_privilegio']== 8) {
-             include_once '../Bitacora/menumc.php';
-        }elseif ($_SESSION['id_privilegio']== 9) {
-            include_once '../Bitacora/menu.php';
-        }elseif ($_SESSION['id_privilegio']== 10) {
-            include_once '../Tecnicos/IZZI/WIZZ.php';
-            }
-        else {
-            header("location: ../Login.php");
-            exit;
-        }
-    }
-    else if(($_SESSION['id_privilegio']>10 && $_SESSION['id_privilegio']<18)){
-        include_once '../Ayudante/menu.php';
-    }
-    else if(($_SESSION['id_privilegio'] == 19 )){
-        include_once '../Pagopro/menu.php';
-    }
-    else if(($_SESSION['id_privilegio'] == 20 )){
-        include_once '../AuxiliarRegistro/menu.php';
-    }
-    else if(($_SESSION['id_privilegio'] == 100 )){
-        include_once '../dashboard/menu.php';
-    }
-}
-?>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Menu</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="../dashboard/index.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../compras/">Comprar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../Recompensas/">Recompensas</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Usuario
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Perfil</a>
+          <a class="dropdown-item" href="../logout.php">Cerrar Seccion</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

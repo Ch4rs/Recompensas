@@ -6,28 +6,8 @@ if (isset($_SESSION['user'])) {
     echo '<script>window.location.href="../index.php";</script>';
     ob_end_flush();
 }
+include_once '../head.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
-    
-
-    <title>Inicio de Sesion - MLEGNA</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <style type="text/css">
-        .error,
-        .invalid {
-            color: red;
-            font-family: "Times New Roman", Times, serif;
-            font-style: italic;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
-</head>
 
 <body>
         <div class="container">
@@ -54,9 +34,6 @@ if (isset($_SESSION['user'])) {
 
         </div>
 </body>
-<script src="../assets/jquery.js"></script>
-<script src="../assets/jquery.validate.min.js"></script>
-<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="main.js?v=5"></script>
-
-</html>
+<?php
+include_once '../foot.php';
+?>

@@ -14,8 +14,8 @@ class Manager extends ConnectionManager
         );
         try {
             $cnx = $this->connectSqlSrv();
-            $sth = "SELECT tu.id_usuario, tu.user, tu.password,  tu.passw, tu.id_privilegio
-                    FROM tb_usuarios tu
+            $sth = "SELECT tu.id_usuario, tu.user, tu.password,  tu.passw, tu.id_cliente
+                    FROM tb_usuarios_clientes tu
                     WHERE user = '" . $dt['user_name'] . "' AND tu.activo = 1;";
             $sth = $cnx->prepare($sth);
             $sth->execute();
@@ -23,7 +23,7 @@ class Manager extends ConnectionManager
                 while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
                     if (password_verify($dt["clean_pass"], $row["password"])) {
                         $_SESSION['user']          = $row["user"];
-                        $_SESSION['id_privilegio'] = $row["id_privilegio"];
+                        $_SESSION['id_cliente'] = $row["id_cliente"];
 
                         $retval["data"] = true;
                     } else {
@@ -34,7 +34,7 @@ class Manager extends ConnectionManager
             } else {
                 $retval["data"] = false;
             }
-        } catch (PDOExeption $e) {
+        } catch (PDOException $e) {
             $retval["error"] = true;
             $retval["r"]     = $e;
         }
