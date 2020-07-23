@@ -1,0 +1,20 @@
+.btn-block {
+  display: block;
+  width: 90vw;
+  height: 50px;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  border-radius: 10px;
+}
+
+.btn-block .btn-info {
+  background-color: #000083;
+  font-size: 16px;
+  color: white;
+}
+/*# sourceMappingURL=style.css.map */

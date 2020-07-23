@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['id_usuario'])) {
   
     echo '<script>window.location.href="../index.php";</script>';
     ob_end_flush();

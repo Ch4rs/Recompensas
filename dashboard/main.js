@@ -1,76 +1,61 @@
 $(document).ready(function () {
-    $('#tb_pedidos_create').validate({
-        language: 'es',
-        errorClass: 'invalid',
-        validClass: 'valid',
-        rules: {
-            cantidad_create: {
-                required: true,
-                number:true
-            }
-        },
-        messages: {
-            cantidad_create: {
-                required: 'Ingrese Cantidad',
-            }
-        },
-        honkeyup: false,
-        submitHandler: function () {
-            $('div.error').hide();
-            _create();
-        },
-        honkeyup: false,
-        highlight: function (element, required) {
-            $(element).fadeOut(function () {
-                $(element).fadeIn();
-                $(element).css('border', '2px solid #FDADAF');
-            });
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).css('border', '1px solid #CCC');
-        }
-    });
-    $('#btn_create').click(function () {
-        $('#tb_pedidos_create').validate();
-    });
+    _get_progress();
 });
-
-function _create() {
-    var datos = {
-        cantidad: $('#cantidad_create').val(),
-        fecha: $('#fecha_create').val(),
-        id_cliente: $('#id_cliente_create').val(),
-        status: $('#status_create').val()
-    };
-    $.post('main.php', {
-        action: 'set',
-        dt: datos
-    }, function (e) {
+function _get_progress() {
+    $.post('main.php', { action: 'get' }, function(e) {
+        console.log(e)
         if (e.error || !e.data) {
-            alertas(e.r, 'danger');
         } else {
-            alertas('Se ha registrado Correctamente', 'success');
-            get();
-            $('#modal_create').modal('hide');
+            draw(parseInt(e.meta),parseInt(e.cantidad));
         }
     });
-
-    return false;
 }
-function cancelar(form) {
-    $('#' + form)[0].reset();
-    var validator = $('#' + form).validate();
-    validator.resetForm();
-    return false;
+function draw_(x,y,size,ctx,exist) {
+    ctx.beginPath();
+    ctx.rect(x, y, size, size);
+    ctx.fillStyle = "#FF0000";
+    ctx.fill();
+    ctx.closePath();
+    if (exist) {
+        ctx.beginPath();
+        ctx.arc((size/2)+x, (size/2)+y, size/2, 0, Math.PI*2, false);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.closePath();
+    }
+    
 }
 
-function alertas(mensaje, tipo) {
-    $.notify({
-        // options
-        message: mensaje
-    }, {
-        // settings
-        type: tipo,
-        delay: 1500
-    });
+function draw(meta,cantidad) {
+    if (cantidad>meta) {
+        cantidad= meta;
+    }
+    $("#avance").text(cantidad+ "/"+ meta)
+    var canvas = document.getElementById("myCanvas");
+    let pos_x = 10,pos_y=10;
+    var width = canvas.width;
+    var ctx = canvas.getContext("2d");
+    let size = 33;
+    let max_x =parseInt(width/size);
+    let y = 0, x= 0;
+    console.log(max_x,width)
+    for (let i = 0; i < meta; i++) {
+        
+        let coor_x = size * x + pos_x * x;
+        let coor_y = size * y + pos_y * y;
+        if (x>=max_x-2) {
+            y++;
+            x = 0;
+        }else{
+            x++;
+        }
+        if (i>=cantidad) {
+            exist= false;
+        }else{
+            exist = true;
+        }
+        console.log(coor_x,coor_y)
+        draw_(coor_x, coor_y,size ,ctx,exist);
+    }
+
 }

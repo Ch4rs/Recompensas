@@ -4,6 +4,15 @@ $(document).ready(function() {
         errorClass: "invalid",
         validClass: "valid",
         rules: {
+            nombre: {
+                required: true,
+            },
+            apellido_paterno: {
+                required: true,
+            },
+            apellido_materno: {
+                required: true,
+            },
             numero: {
                 required: true,
                 number:true
@@ -13,8 +22,17 @@ $(document).ready(function() {
             }
         },
         messages: {
+            nombre: {
+                required: 'Ingrese Nombre'
+            },
+            apellido_paterno: {
+                required: 'Ingrese Apellido Paterno'
+            },
+            apellido_materno: {
+                required: 'Ingrese Apellido Materno'
+            },
             numero: {
-                required: 'Ingrese Usuario'
+                required: 'Ingrese Numero'
             },
             passw: {
                 required: 'Ingrese Password'
@@ -23,7 +41,7 @@ $(document).ready(function() {
         honkeyup: true,
         submitHandler: function() {
             $("div.error").hide();
-            _login();
+            _register();
         },
 
         highlight: function(element, required) {
@@ -43,20 +61,23 @@ $("#btnEnviar").click(function() {
     $("#form_login").validate();
 });
 
-function _login() {
+function _register() {
     var datos = {
+        nombre: $('#nombre').val(),
+        apellido_paterno: $('#apellido_paterno').val(),
+        apellido_materno: $('#apellido_materno').val(),
         numero: $('#numero').val(),
         passw: $('#passw').val()
     }
     console.log(datos)
-    $.post('main.php', { action: 'login', dt: datos }, function(e) {
+    $.post('main.php', { action: 'register', dt: datos }, function(e) {
         console.log(e)
         if (e.error || !e.data) {
             $("#error").empty();
-            $("#error").append("Error de Contraseña o Usuario");
+            $("#error").append(e.r);
             $("#error").addClass("error");
         } else {
-            window.location = "../index.php";
+            window.location = "../login";
         }
     });
 }
