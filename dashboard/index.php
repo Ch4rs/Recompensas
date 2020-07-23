@@ -12,7 +12,9 @@ include_once '../head.php';
 ?>
 <body>
     <div class='col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-xs-10 offset-xs-1'>
-    <h3>Progreso de Meta <label for=""id="avance" name="avance"></label></h3>
+    <h4>Avances de Recompensas</h4>
+    <h4><label for=""id="promocion" name="promocion"></label>   <label for=""id="avance" name="avance"></label></h4>
+    <label for=""id="recompensa"name="recompensa"></label>
     <canvas id="myCanvas" height="480"></canvas>
     </div>
 </body>

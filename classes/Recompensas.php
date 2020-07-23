@@ -14,7 +14,9 @@ class Manager extends ConnectionManager
             "r"     => "",
             "total"=>0,
             "cantidad"=>0,
-            "meta"=>0
+            "meta"=>0,
+            "promocion"=>"Sin Promociones",
+            "recompensas"=>"Sin Recompensas",
         );
         try {
             $cnx = $this->connectSqlSrv();
@@ -32,6 +34,8 @@ class Manager extends ConnectionManager
                         $retval['total'] = $row['total'];
                         $retval['cantidad'] = $row['cantidad'];
                         $retval['meta'] = $row['meta'];
+                        $retval['promocion'] = $row['promocion'];
+                        $retval['recompensa'] = $row['recompensa'];
                     }
                 }
                 $retval["data"] = true;

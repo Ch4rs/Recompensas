@@ -7,5 +7,9 @@ if (isset($_POST['action'])) {
             $obj = new Manager();
             echo $obj->set($_POST['dt']);
             break;
+        case 'get':
+            $obj = new Manager();
+            echo $obj->get();
+            break;
     }
 }

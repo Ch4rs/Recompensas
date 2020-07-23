@@ -33,8 +33,25 @@ $(document).ready(function () {
     $('#btn_create').click(function () {
         $('#tb_pedidos_create').validate();
     });
+    _get_progress();
 });
 
+function _get_progress() {
+    $.post('main.php', { action: 'get' }, function(e) {
+        console.log(e)
+        if (e.error || !e.data) {
+        } else {
+            $("#promocion").text(e.promocion);
+            $("#recompensa").text(e.recompensa);
+            let cantidad = parseInt(e.cantidad);
+            let meta = parseInt(e.meta)
+            if (cantidad>meta) {
+                cantidad= meta;
+            }
+            $("#avance").text(cantidad+ "/"+ meta)
+        }
+    });
+}
 function _create() {
     var datos = {
         id_producto:'1',
@@ -50,7 +67,7 @@ function _create() {
         if (e.error || !e.data) {
             alertas(e.r, 'danger');
         } else {
-            alertas('Se ha registrado Correctamente', 'success');
+            window.location = "../index.php";
         }
     });
 

@@ -6,6 +6,8 @@ function _get_progress() {
         console.log(e)
         if (e.error || !e.data) {
         } else {
+            $("#promocion").text(e.promocion);
+            $("#recompensa").text(e.recompensa);
             draw(parseInt(e.meta),parseInt(e.cantidad));
         }
     });
@@ -13,16 +15,20 @@ function _get_progress() {
 function draw_(x,y,size,ctx,exist) {
     ctx.beginPath();
     ctx.rect(x, y, size, size);
-    ctx.fillStyle = "#FF0000";
+    let color = "#FF0000";
+    if (exist) {
+        color="#bfff00";
+    }
+    ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
-    if (exist) {
+    /*if (exist) {
         ctx.beginPath();
         ctx.arc((size/2)+x, (size/2)+y, size/2, 0, Math.PI*2, false);
         ctx.fillStyle = "green";
         ctx.fill();
         ctx.closePath();
-    }
+    }*/
     
 }
 
@@ -32,10 +38,10 @@ function draw(meta,cantidad) {
     }
     $("#avance").text(cantidad+ "/"+ meta)
     var canvas = document.getElementById("myCanvas");
-    let pos_x = 10,pos_y=10;
+    let pos_x = 1,pos_y=1;
     var width = canvas.width;
     var ctx = canvas.getContext("2d");
-    let size = 33;
+    let size = 20;
     let max_x =parseInt(width/size);
     let y = 0, x= 0;
     console.log(max_x,width)
