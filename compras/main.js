@@ -53,25 +53,31 @@ function _get_progress() {
     });
 }
 function _create() {
-    var datos = {
-        id_producto:'1',
-        cantidad: $('#cantidad_create').val(),
-    };
-    console.log(datos);
+    let can =parseInt($('#cantidad_create').val());
+    if (can>0) {
+        var datos = {
+            id_producto:'1',
+            cantidad: $('#cantidad_create').val(),
+        };
+        console.log(datos);
+    
+        $.post('main.php', {
+            action: 'set',
+            dt: datos
+        }, function (e) {
+            console.log(e);
+            if (e.error || !e.data) {
+                alertas(e.r, 'danger');
+            } else {
+                window.location = "../index.php";
+            }
+        });
+    
+        return false;
+    } else {
+        alert("La cantidad debe ser mayor a 0");
+    }
 
-    $.post('main.php', {
-        action: 'set',
-        dt: datos
-    }, function (e) {
-        console.log(e);
-        if (e.error || !e.data) {
-            alertas(e.r, 'danger');
-        } else {
-            window.location = "../index.php";
-        }
-    });
-
-    return false;
 }
 function cancelar(form) {
     $('#' + form)[0].reset();
